@@ -3,33 +3,25 @@ const btn = document.getElementById('searchBtn');
 const form = document.getElementById('formu');
 
 
-
-function getCoord (userVille) {
-fetch(`https://geo.api.gouv.fr/communes?nom=${userVille}&fields=departement&boost=population&limit=5`)
-.then((response) => response.json())
-.then((data) => meteo(userVille));
-displayVille (userVille);
-//meteo(userVille))
-
-};
-
 btn.addEventListener('click', () => {
-    let cityName = city.value;
+    let userVille = city.value;
     popIcon ()
-    return getCoord(cityName);
+    return meteo(userVille);
 });
 
 form.addEventListener('submit', (event) => {
     event.preventDefault();
-    let cityName = city.value;
+    let userVille = city.value;
     popIcon ()
-    return getCoord(cityName);
+    return meteo(userVille);
 });
 
 function meteo (userVille) {
 fetch(`https://api.openweathermap.org/data/2.5/weather?q=${userVille}&appid=7ebd51d4b0d2f31095d48bb3d6a3a883&units=metric`)
 .then((reponse) => reponse.json())
-.then((data) => displayData (data)) }
+.then((data) => displayData (data))
+displayVille (userVille); 
+};
 
 
 function displayData(data) {
